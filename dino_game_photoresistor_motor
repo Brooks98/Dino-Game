@@ -1,0 +1,27 @@
+#include <Servo.h>
+
+int photoPin = A0;
+int ledPin = 7;
+Servo myservo;    //create servo object to control a servo
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  myservo.attach(9);    //attaches the servo on pin 9 to the servo object
+}
+
+void loop() {
+  int lightRaw = analogRead(photoPin);
+  int light = map(lightRaw, 1023, 0, 10, 0);
+
+  if (light < 5) {
+    digitalWrite(ledPin, HIGH);
+    myservo.write(0);   //set servo to position 0
+     delay(15);  
+  }
+
+  else {
+    digitalWrite(ledPin, LOW);
+    myservo.write(30);    //set servo to position 30
+     delay(15);  
+  }
+}
